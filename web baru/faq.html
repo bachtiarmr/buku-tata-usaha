@@ -10,6 +10,13 @@
     body {
       background-color: #f8f9fa;
     }
+    .navbar {
+      background: linear-gradient(135deg, #f6d5f7, #fbe9d7);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      margin: 1rem;
+      padding: 0.5rem 1rem;
+    }
     .faq-header {
       background: linear-gradient(135deg, #0d6efd, #0dcaf0);
       color: white;
@@ -26,30 +33,24 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Buku Tahunan</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="landingpage.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">FAQ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.html">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact</a>
-        </li>
-      </ul>
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Buku Tahunan</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAesthetic" aria-controls="navbarAesthetic" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarAesthetic">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <button class="btn btn-aesthetic ms-lg-3">Join Us</button>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
   <!-- Header -->
   <section class="faq-header">
