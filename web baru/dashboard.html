@@ -1,269 +1,265 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Buku Tamu TU</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
-    <style>
-        /* Gaya Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1000; /* Sidebar di atas konten lain */
-            padding: 48px 0 0; /* Padding atas untuk navbar fixed */
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Buku Tamu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+    .card-stat { color: white; border-radius: 10px; padding: 20px; display: flex; align-items: center; justify-content: space-between; }
+    .card-stat h3 { font-size: 2rem; margin: 0; }
+    .icon { font-size: 2rem; opacity: 0.8; }
+    .bg-green { background-color: #198754; }
+    .bg-blue { background-color: #0dcaf0; }
+    .bg-yellow { background-color: #ffc107; color: #333; }
+    .bg-darkblue { background-color: #0d6efd; }
+    .status-badge { padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                /* Sembunyikan sidebar di layar kecil, gunakan offcanvas atau tombol toggle */
-                display: none;
-            }
-        }
+    body {
+   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url(b53c945a9fe5f6f72bd29af94cc5435d.jpg);
+  background-size: cover; /* biar gambar menutupi seluruh layar */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
 
-        .sidebar-sticky {
-            height: 100%;
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto; /* Scrollable area */
-        }
+/* Tambahkan overlay agar konten lebih terbaca */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* gelapkan gambar sedikit */
+  z-index: -1;
+}
 
-        .main-content {
-            margin-left: 280px; /* Jarak untuk Sidebar (lebar col-md-3 atau 25%) */
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-            }
-        }
-        
-        .nav-link.active {
-            font-weight: bold;
-            color: var(--bs-primary) !important;
-            background-color: var(--bs-light);
-        }
-    </style>
+  </style>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-journal-check"></i> Dashboard TU
-            </a>
-            <button class="btn btn-dark d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-                <i class="bi bi-list"></i>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    </li>
-                    <li class="nav-item"><form class="d-flex" action="logout.php" method="POST">
-        <button class="btn btn-outline-danger" type="submit">
-          <i class="bi bi-box-arrow-right"></i> Keluar
-          </button>
-      </form>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">📘 Buku Tamu Sekolah</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+      </ul>
     </div>
   </div>
 </nav>
 
-                        
-                    </li>
-                </ul>
-            </div>
+<div class="container py-4">
+  <h3 class="text-white mb-4">📘 Dashboard Buku Tamu</h3>
+
+  <!-- Statistik -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-green">
+        <div>
+          <h6>Tamu Hari Ini</h6>
+          <h3 id="tamuHariIni">0</h3>
         </div>
-    </nav>
+        <div class="icon">👥</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-blue">
+        <div>
+          <h6>Total Tamu Bln Ini</h6>
+          <h3 id="tamuBulanIni">0</h3>
+        </div>
+        <div class="icon">📊</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-yellow">
+        <div>
+          <h6>Belum Diproses</h6>
+          <h3 id="belumProses">0</h3>
+        </div>
+        <div class="icon">🔔</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-darkblue">
+        <div>
+          <h6>Pending</h6>
+          <h3 id="pendingCount">0</h3>
+        </div>
+        <div class="icon">⚠️</div>
+      </div>
+    </div>
+  </div>
 
-    <div class="container-fluid">
-        <div class="row">
+  <!-- Daftar tamu -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Daftar Tamu</h5>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tambahModal">+ Tambah Tamu</button>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input type="text" id="searchInput" class="form-control" placeholder="Cari Nama / Instansi...">
+        </div>
+        <div class="col-md-3">
+          <select id="filterStatus" class="form-select">
+            <option value="">Filter Status</option>
+            <option value="Selesai">Selesai</option>
+            <option value="Proses">Proses</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+      </div>
 
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar offcanvas offcanvas-start">
-                <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                <i class="bi bi-house-door"></i>
-                                Dashboard Utama
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-table"></i>
-                                Data Tamu Hari Ini
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-calendar-check"></i>
-                                Rekap Bulanan
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-file-earmark-spreadsheet"></i>
-                                Export Data
-                            </a>
-                        </li>
-                    </ul>
+      <table class="table table-bordered align-middle" id="tabelTamu">
+        <thead class="table-light">
+          <tr>
+            <th>Waktu Masuk</th>
+            <th>Nama Tamu</th>
+            <th>Instansi</th>
+            <th>Keperluan</th>
+            <th>Bertemu</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Lainnya</span>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="bi bi-gear"></i>
-                                Pengaturan
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+<!-- Modal Tambah Tamu -->
+<div class="modal fade" id="tambahModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="formTamu">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Tambah Tamu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Nama Tamu</label>
+            <input type="text" id="nama" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Instansi</label>
+            <input type="text" id="instansi" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Keperluan</label>
+            <input type="text" id="keperluan" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Bertemu Dengan</label>
+            <input type="text" id="bertemu" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Status</label>
+            <select id="status" class="form-select" required>
+              <option value="Selesai">Selesai</option>
+              <option value="Proses">Proses</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Waktu Masuk</label>
+            <input type="time" id="waktu" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-                
-                <h2 class="mt-4 mb-4">Dashboard Buku Tamu</h2>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let tamuList = JSON.parse(localStorage.getItem('tamuList')) || [];
 
-                <div class="row g-4 mb-5">
-                    
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card bg-success text-white shadow-sm">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">Tamu Hari Ini</h5>
-                                        <p class="card-text display-6">3</p>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="bi bi-people display-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+function simpanLocal() {
+  localStorage.setItem('tamuList', JSON.stringify(tamuList));
+}
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card bg-info text-white shadow-sm">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">Total Tamu Bln Ini</h5>
-                                        <p class="card-text display-6">3</p>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="bi bi-bar-chart display-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+function renderTabel() {
+  const tbody = document.querySelector('#tabelTamu tbody');
+  tbody.innerHTML = '';
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const filter = document.getElementById('filterStatus').value;
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card bg-warning text-dark shadow-sm">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">Belum Diproses</h5>
-                                        <p class="card-text display-6">1</p>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="bi bi-bell display-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  let filtered = tamuList.filter(t => 
+    (t.nama.toLowerCase().includes(search) || t.instansi.toLowerCase().includes(search)) &&
+    (filter === '' || t.status === filter)
+  );
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card bg-primary text-white shadow-sm">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h5 class="card-title">Pending</h5>
-                                        <p class="card-text display-6">1</p>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="bi bi-exclamation-triangle display-4"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  filtered.forEach((t, index) => {
+    let badgeClass = t.status === 'Selesai' ? 'bg-success' : 
+                     (t.status === 'Proses' ? 'bg-warning text-dark' : 'bg-danger');
+    tbody.innerHTML += `
+      <tr>
+        <td>${t.waktu}</td>
+        <td>${t.nama}</td>
+        <td>${t.instansi}</td>
+        <td>${t.keperluan}</td>
+        <td>${t.bertemu}</td>
+        <td><span class="status-badge ${badgeClass}">${t.status}</span></td>
+        <td>
+          <button class="btn btn-sm btn-danger" onclick="hapusTamu(${index})">🗑 Hapus</button>
+        </td>
+      </tr>
+    `;
+  });
 
-                </div>
-                
-                <div class="card shadow-sm">
-                    <div class="card-header bg-light">
-                        <h4 class="mb-0">Daftar Tamu </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Cari Nama / Instansi...">
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Filter Hari Ini</option>
-                                    <option value="1">Filter Minggu Ini</option>
-                                    <option value="2">Filter Bulan Ini</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 text-end">
-                                <button class="btn btn-outline-primary"><i class="bi bi-download"></i> Export Excel</button>
-                            </div>
-                        </div>
-                        
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-secondary">
-                                    <tr>
-                                        <th>Waktu Masuk</th>
-                                        <th>Nama Tamu</th>
-                                        <th>Instansi</th>
-                                        <th>Keperluan</th>
-                                        <th>Bertemu</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>Budi Santoso</td>
-                                        <td>PT. Maju Jaya</td>
-                                        <td>Penawaran Kerjasama</td>
-                                        <td>Kepala Sekolah</td>
-                                        <td><span class="badge bg-success">Selesai</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>11:30</td>
-                                        <td>Siti Aminah</td>
-                                        <td>Wali Murid Kelas X</td>
-                                        <td>Konsultasi Nilai</td>
-                                        <td>Ibu Ani, Guru BK</td>
-                                        <td><span class="badge bg-warning text-dark">Proses</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>14:15</td>
-                                        <td>Ahmad Fikri</td>
-                                        <td>Dinas Pendidikan</td>
-                                        <td>Verifikasi Data</td>
-                                        <td>Kepala TU</td>
-                                        <td><span class="badge bg-danger">Pending</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    
+  updateStatistik();
+}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+function hapusTamu(index) {
+  if (confirm("Apakah kamu yakin ingin menghapus data ini?")) {
+    tamuList.splice(index, 1);
+    simpanLocal();
+    renderTabel();
+  }
+}
+
+function updateStatistik() {
+  document.getElementById('tamuHariIni').innerText = tamuList.length;
+  document.getElementById('tamuBulanIni').innerText = tamuList.length;
+  document.getElementById('belumProses').innerText = tamuList.filter(t => t.status === 'Proses').length;
+  document.getElementById('pendingCount').innerText = tamuList.filter(t => t.status === 'Pending').length;
+}
+
+document.getElementById('formTamu').addEventListener('submit', e => {
+  e.preventDefault();
+  let t = {
+    waktu: document.getElementById('waktu').value,
+    nama: document.getElementById('nama').value,
+    instansi: document.getElementById('instansi').value,
+    keperluan: document.getElementById('keperluan').value,
+    bertemu: document.getElementById('bertemu').value,
+    status: document.getElementById('status').value
+  };
+  tamuList.push(t);
+  simpanLocal();
+  renderTabel();
+  e.target.reset();
+  bootstrap.Modal.getInstance(document.getElementById('tambahModal')).hide();
+});
+
+document.getElementById('searchInput').addEventListener('input', renderTabel);
+document.getElementById('filterStatus').addEventListener('change', renderTabel);
+
+// render pertama kali saat halaman dibuka
+renderTabel();
+</script>
 
 </body>
 </html>
