@@ -5,13 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Buku Tamu TU Tahunan</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+     body {
+      scroll-behavior: smooth;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url(#);
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
     <h2>Buku Tamu Tata Usaha</h2>
     <p class="subtitle">Login untuk melanjutkan</p>
 
-    <form id="loginForm">
+    <form action="dashboard.html">
       <div class="form-group">
         <label for="username">Email</label>
         <input type="text" id="Email" placeholder="Masukkan Email Anda" required />
@@ -28,6 +37,7 @@
     </div>
 
       <button type="submit">Masuk</button>
+
       <p id="error-msg" class="error"></p>
     </form>
     </div>

@@ -1,110 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap 5 CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Buku Tamu</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
+    body { background-color: #f8f9fa; }
+    .card-stat { color: white; border-radius: 10px; padding: 20px; display: flex; align-items: center; justify-content: space-between; }
+    .card-stat h3 { font-size: 2rem; margin: 0; }
+    .icon { font-size: 2rem; opacity: 0.8; }
+    .bg-green { background-color: #198754; }
+    .bg-blue { background-color: #0dcaf0; }
+    .bg-yellow { background-color: #ffc107; color: #333; }
+    .bg-darkblue { background-color: #0d6efd; }
+    .status-badge { padding: 4px 10px; border-radius: 10px; font-size: 0.85rem; }
+
     body {
-      min-height: 100vh;
-      display: flex;
+   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url(fotbar.jpg);
+  background-size: cover; /* biar gambar menutupi seluruh layar */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.navbar {
+      background: linear-gradient(135deg, #f6d5f7, #fbe9d7);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      margin: 1rem;
+      padding: 0.5rem 1rem;
     }
 
-    .sidebar {
-      width: 250px;
-      background-color: #343a40;
-      color: white;
-      flex-shrink: 0;
-    }
+/* Tambahkan overlay agar konten lebih terbaca */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* gelapkan gambar sedikit */
+  z-index: -1
+}
 
-    .sidebar a {
-      color: white;
-      text-decoration: none;
-      padding: 15px;
-      display: block;
-    }
-
-    .sidebar a:hover {
-      background-color: #495057;
-    }
-
-    .main-content {
-      flex-grow: 1;
-      padding: 20px;
-    }
-
-    .navbar {
-      border-bottom: 1px solid #dee2e6;
-    }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Buku Tamu Tata Usaha</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAesthetic" aria-controls="navbarAesthetic" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <!-- Sidebar -->
-  <div class="sidebar d-flex flex-column p-3">
-    <h4 class="text-center">My Dashboard</h4>
-    <hr>
-    <a href="#">🏠 Dashboard</a>
-    <a href="#">👥 Users</a>
-    <a href="#">📊 Reports</a>
-    <a href="#">⚙️ Settings</a>
-    <a href="/logout" class="mt-auto text-danger">🚪 Logout</a>
+      <div class="collapse navbar-collapse" id="navbarAesthetic">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="galeri.html">Galeri</a></li>
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Beranda</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container py-4">
+  <h3 class="text-white mb-4">Ayo daftar untuk berkunjung!</h3>
+
+  <!-- Statistik -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-green">
+        <div>
+          <h6>Tamu Hari Ini</h6>
+          <h3 id="tamuHariIni">0</h3>
+        </div>
+        <div class="icon">👥</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-blue">
+        <div>
+          <h6>Total Tamu Bln Ini</h6>
+          <h3 id="tamuBulanIni">0</h3>
+        </div>
+        <div class="icon">📊</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-yellow">
+        <div>
+          <h6>Belum Diproses</h6>
+          <h3 id="belumProses">0</h3>
+        </div>
+        <div class="icon">🔔</div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card-stat bg-darkblue">
+        <div>
+          <h6>Pending</h6>
+          <h3 id="pendingCount">0</h3>
+        </div>
+        <div class="icon">⚠️</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Welcome, {{ username }}</span>
-      </div>
-    </nav>
-
-    <div class="container mt-4">
-      <div class="row">
-        <!-- Card 1 -->
-        <div class="col-md-4">
-          <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Users</h5>
-              <p class="card-text">Total registered users: <strong>120</strong></p>
-            </div>
-          </div>
+  <!-- Daftar tamu -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Daftar Tamu</h5>
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tambahModal">+ Tambah Tamu</button>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input type="text" id="searchInput" class="form-control" placeholder="Cari Nama / Instansi...">
         </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4">
-          <div class="card text-white bg-success mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Reports</h5>
-              <p class="card-text">New reports today: <strong>8</strong></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4">
-          <div class="card text-white bg-warning mb-3">
-            <div class="card-body">
-              <h5 class="card-title">Revenue</h5>
-              <p class="card-text">This month: <strong>$2,400</strong></p>
-            </div>
-          </div>
+        <div class="col-md-3">
+          <select id="filterStatus" class="form-select">
+            <option value="">Filter Status</option>
+            <option value="Selesai">Selesai</option>
+            <option value="Proses">Proses</option>
+            <option value="Pending">Pending</option>
+          </select>
         </div>
       </div>
 
-      <!-- Table Example -->
-      <div class="card mt-4">
-        <div class="card-header">
-          Recent Activities
+      <table class="table table-bordered align-middle" id="tabelTamu">
+        <thead class="table-light">
+          <tr>
+            <th>Waktu Masuk</th>
+            <th>Nama Tamu</th>
+            <th>Instansi</th>
+            <th>Keperluan</th>
+            <th>Bertemu</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Tambah Tamu -->
+<div class="modal fade" id="tambahModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="formTamu">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Tambah Tamu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="card-body">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>User</th>
-                <th>Action</t
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Nama Tamu</label>
+            <input type="text" id="nama" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Instansi</label>
+            <input type="text" id="instansi" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Keperluan</label>
+            <input type="text" id="keperluan" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Bertemu Dengan</label>
+            <input type="text" id="bertemu" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Status</label>
+            <select id="status" class="form-select" required>
+              <option value="Selesai">Selesai</option>
+              <option value="Proses">Proses</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Waktu Masuk</label>
+            <input type="time" id="waktu" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let tamuList = JSON.parse(localStorage.getItem('tamuList')) || [];
+
+function simpanLocal() {
+  localStorage.setItem('tamuList', JSON.stringify(tamuList));
+}
+
+function renderTabel() {
+  const tbody = document.querySelector('#tabelTamu tbody');
+  tbody.innerHTML = '';
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const filter = document.getElementById('filterStatus').value;
+
+  let filtered = tamuList.filter(t => 
+    (t.nama.toLowerCase().includes(search) || t.instansi.toLowerCase().includes(search)) &&
+    (filter === '' || t.status === filter)
+  );
+
+  filtered.forEach((t, index) => {
+    let badgeClass = t.status === 'Selesai' ? 'bg-success' : 
+                     (t.status === 'Proses' ? 'bg-warning text-dark' : 'bg-danger');
+    tbody.innerHTML += `
+      <tr>
+        <td>${t.waktu}</td>
+        <td>${t.nama}</td>
+        <td>${t.instansi}</td>
+        <td>${t.keperluan}</td>
+        <td>${t.bertemu}</td>
+        <td><span class="status-badge ${badgeClass}">${t.status}</span></td>
+        <td>
+          <button class="btn btn-sm btn-danger" onclick="hapusTamu(${index})">🗑 Hapus</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  updateStatistik();
+}
+
+function hapusTamu(index) {
+  if (confirm("Apakah kamu yakin ingin menghapus data ini?")) {
+    tamuList.splice(index, 1);
+    simpanLocal();
+    renderTabel();
+  }
+}
+
+function updateStatistik() {
+  document.getElementById('tamuHariIni').innerText = tamuList.length;
+  document.getElementById('tamuBulanIni').innerText = tamuList.length;
+  document.getElementById('belumProses').innerText = tamuList.filter(t => t.status === 'Proses').length;
+  document.getElementById('pendingCount').innerText = tamuList.filter(t => t.status === 'Pending').length;
+}
+
+document.getElementById('formTamu').addEventListener('submit', e => {
+  e.preventDefault();
+  let t = {
+    waktu: document.getElementById('waktu').value,
+    nama: document.getElementById('nama').value,
+    instansi: document.getElementById('instansi').value,
+    keperluan: document.getElementById('keperluan').value,
+    bertemu: document.getElementById('bertemu').value,
+    status: document.getElementById('status').value
+  };
+  tamuList.push(t);
+  simpanLocal();
+  renderTabel();
+  e.target.reset();
+  bootstrap.Modal.getInstance(document.getElementById('tambahModal')).hide();
+});
+
+document.getElementById('searchInput').addEventListener('input', renderTabel);
+document.getElementById('filterStatus').addEventListener('change', renderTabel);
+
+// render pertama kali saat halaman dibuka
+renderTabel();
+</script>
+
+</body>
+</html>
