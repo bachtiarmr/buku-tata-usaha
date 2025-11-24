@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #d38888, #fdffff);
+  background: <img src="siswa.jpg" alt="Deskripsi gambar" width="300" height="200">
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,10 +13,10 @@ body {
 }
 
 .login-container {
-  background: #dcb5b5;
+  background: #f9f9fa;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 5px 15px rgb(255, 255, 255);
+  box-shadow: 0 5px 15px#140b9f(7, 7, 143);
   width: 100%;
   max-width: 360px;
   text-align: center;
@@ -54,7 +54,7 @@ input {
 }
 
 button {
-  background-color: #d38888;
+  background-color: #140b9f;
   color: rgb(255, 255, 255);
   border: none;
   width: 100%;
