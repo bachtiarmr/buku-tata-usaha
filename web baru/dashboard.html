@@ -18,12 +18,19 @@
 
     body {
    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                  url(b53c945a9fe5f6f72bd29af94cc5435d.jpg);
+                  url(fotbar.jpg);
   background-size: cover; /* biar gambar menutupi seluruh layar */
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
 }
+.navbar {
+      background: linear-gradient(135deg, #f6d5f7, #fbe9d7);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      margin: 1rem;
+      padding: 0.5rem 1rem;
+    }
 
 /* Tambahkan overlay agar konten lebih terbaca */
 .overlay {
@@ -33,28 +40,30 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4); /* gelapkan gambar sedikit */
-  z-index: -1;
+  z-index: -1
 }
 
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">📘 Buku Tamu Sekolah</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Buku Tamu Tata Usaha</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAesthetic" aria-controls="navbarAesthetic" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarAesthetic">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="galeri.html">Galeri</a></li>
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Beranda</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 <div class="container py-4">
-  <h3 class="text-white mb-4">📘 Dashboard Buku Tamu</h3>
+  <h3 class="text-white mb-4">Ayo daftar untuk berkunjung!</h3>
 
   <!-- Statistik -->
   <div class="row mb-4">
